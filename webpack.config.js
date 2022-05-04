@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   mode,
   devtool: mode === 'production' ? 'nosources-source-map' : 'source-map',
-  entry: ['./src/index.js', './src/style.scss'],
+  entry: ['regenerator-runtime/runtime.js', './src/index.js', './src/style.scss'],
   output: {
     path: path.resolve(__dirname, './dist'),
     clean: true,

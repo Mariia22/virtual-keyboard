@@ -1,8 +1,7 @@
-function test() {
-  const doc = document.querySelector('body');
-  const node = document.createElement('h1');
-  node.innerHTML = '1';
-  doc.append(node);
-}
+import Keyboard from './js/Keyboard';
+import keys from './js/data';
 
-test();
+window.onload = function load() {
+  const virtualKeyboard = new Keyboard('ru', keys);
+  virtualKeyboard.buildKeyboard();
+};
