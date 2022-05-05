@@ -7,6 +7,7 @@ class Keyboard {
     this.textarea = '';
     this.content = '';
     this.row = '';
+    // this.text = '';
   }
 
   createDomElement(element, ...classes) {
@@ -22,7 +23,7 @@ class Keyboard {
     this.textarea = this.createDomElement('textarea', 'keyboard__textarea');
     this.content = this.createDomElement('div', 'keyboard__content');
     this.paragraph = this.createDomElement('p', 'keyboard__info');
-    this.paragraph.innerHTML = 'Клавиатура создана для ОС MAC';
+    this.paragraph.innerHTML = 'Клавиатура создана на ОС MAC';
     this.paragraphSwitchLang = this.createDomElement('p', 'keyboard__info');
     this.paragraphSwitchLang.innerHTML = 'Переключение языка левый Alt+Space';
     this.appendElements();
@@ -95,14 +96,13 @@ class Keyboard {
     button.append(spanRus);
     button.append(spanEn);
     button.addEventListener('click', (event) => {
-      this.onClickKey(event.target.innerHTML);
+      this.onClickKey(event.target.innerText);
     });
     this.row.append(button);
   }
 
   onClickKey(key) {
     if (key !== 'Shift') {
-      // this.text += key;
       this.textarea.value += key;
     }
   }

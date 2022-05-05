@@ -732,16 +732,6 @@ const keys = {
     enCaps: 'command',
     enShiftCaps: 'command',
   },
-  AltRight: {
-    rusCaseDown: 'alt',
-    rusCaseUp: 'alt',
-    rusCaps: 'alt',
-    rusShiftCaps: 'alt',
-    enCaseDown: 'alt',
-    enCaseUp: 'alt',
-    enCaps: 'alt',
-    enShiftCaps: 'alt',
-  },
   ArrowLeft: {
     rusCaseDown: '◄',
     rusCaseUp: '◄',
@@ -771,6 +761,16 @@ const keys = {
     enCaseUp: '►',
     enCaps: '►',
     enShiftCaps: '►',
+  },
+  AltRight: {
+    rusCaseDown: 'alt',
+    rusCaseUp: 'alt',
+    rusCaps: 'alt',
+    rusShiftCaps: 'alt',
+    enCaseDown: 'alt',
+    enCaseUp: 'alt',
+    enCaps: 'alt',
+    enShiftCaps: 'alt',
   },
 };
 

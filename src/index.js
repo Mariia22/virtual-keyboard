@@ -9,7 +9,8 @@ window.onload = function load() {
     console.log(event);
     event.preventDefault();
     if (event.key !== 'Shift') {
-      virtualKeyboard.textarea.value += event.key;
+      // virtualKeyboard.textarea.value += event.key;
+      virtualKeyboard.onClickKey(event.key);
     }
   });
 };

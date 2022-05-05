@@ -1,0 +1,22 @@
+.keyboard__textarea {
+  font-family: inherit;
+  width: 740px;
+  height: 150px;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 2px inset $color-white;
+  white-space: pre-wrap;
+  box-shadow: inset 2px 2px 5px #0002, inset -2px -2px 5px #ffffff;
+  outline: none;
+
+  @include media-tablet {
+    width: 450px;
+  }
+
+  @include media-mobile {
+    width: 300px;
+  }
+}

@@ -1,20 +1,12 @@
-@mixin font ($size, $lineheight: $size, $weight: bold, $style: normal) {
-  font-size: $size;
-  font-style: $style;
-  font-weight: $weight;
-  line-height: $lineheight;
-}
+//Abstract
+@import "./sass/abstract/mixins";
+@import "./sass/abstract/placeholders";
+@import "./sass/abstract/variables";
 
-%font-add {
-  font-family: 'Georgia', 'Times New Roman', serif;
-}
+//Base
+@import "./sass/base/normalize";
+@import "./sass/base/base";
 
-
-body {
-  @include font($size: 1rem, $lineheight: 1.6rem, $weight: normal);
-  background-color: green;
-}
-
-.hidden {
-  display: none
-}
+// Components
+@import "./sass/components/keyboard";
+@import "./sass/components/textarea";
