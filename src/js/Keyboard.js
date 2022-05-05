@@ -23,9 +23,7 @@ class Keyboard {
     this.textarea = this.createDomElement('textarea', 'keyboard__textarea');
     this.content = this.createDomElement('div', 'keyboard__content');
     this.paragraph = this.createDomElement('p', 'keyboard__info');
-    this.paragraph.innerHTML = 'Клавиатура создана на ОС MAC';
-    this.paragraphSwitchLang = this.createDomElement('p', 'keyboard__info');
-    this.paragraphSwitchLang.innerHTML = 'Переключение языка левый Alt+Space';
+    this.paragraph.innerHTML = 'Клавиатура создана на MAC OS, поэтому имеет некоторые особенности, например кнопка "delete" работает как "backspase" на Windows. "fn" +"delete" - удаление символов после курсора. Переключение языка левый Alt+Space.';
     this.appendElements();
     this.createRow();
     const arrayKeys = Object.keys(this.keys);
@@ -57,10 +55,9 @@ class Keyboard {
 
   appendElements() {
     this.wrapper.append(this.header);
-    this.wrapper.append(this.textarea);
+    this.content.append(this.textarea);
     this.wrapper.append(this.content);
     this.wrapper.append(this.paragraph);
-    this.wrapper.append(this.paragraphSwitchLang);
     document.body.append(this.wrapper);
   }
 

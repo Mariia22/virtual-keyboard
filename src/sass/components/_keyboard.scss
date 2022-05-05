@@ -1,5 +1,5 @@
 .keyboard__content {
-  width: 740px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,9 +29,14 @@
   border: none;
   outline: none;
   cursor: pointer;
+
+  @include media-mobile {
+    font-size: .5rem;
+  }
 }
 
-.keyboard__key:active {
+.keyboard__key:active,
+.keyboard__key-active {
   box-shadow: 1px 1px 2px #fff8f8, -1px -1px 2px #474343;
 }
 
@@ -93,4 +98,8 @@
 .keyboard__key.MetaRight {
   width: 80px;
   border-radius: 10px;
+
+  @include media-mobile {
+    width: 60px;
+  }
 }

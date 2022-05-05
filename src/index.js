@@ -6,11 +6,16 @@ window.onload = function load() {
   virtualKeyboard.buildKeyboard();
 
   document.addEventListener('keydown', (event) => {
-    console.log(event);
     event.preventDefault();
+    const element = document.querySelector(`.${event.code}`);
+    element.classList.add('keyboard__key-active');
     if (event.key !== 'Shift') {
-      // virtualKeyboard.textarea.value += event.key;
       virtualKeyboard.onClickKey(event.key);
     }
   });
 };
+
+document.addEventListener('keyup', () => {
+  const element = document.querySelector('.keyboard__key-active');
+  element.classList.remove('keyboard__key-active');
+});
