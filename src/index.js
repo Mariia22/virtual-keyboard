@@ -2,20 +2,21 @@ import Keyboard from './js/Keyboard';
 import keys from './js/data';
 
 window.onload = function load() {
-  const virtualKeyboard = new Keyboard('ru', keys);
+  const virtualKeyboard = new Keyboard('en', keys);
   virtualKeyboard.buildKeyboard();
-
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
     const element = document.querySelector(`.${event.code}`);
     element.classList.add('keyboard__key-active');
-    if (event.key !== 'Shift') {
-      virtualKeyboard.onClickKey(event.key);
+    virtualKeyboard.onClickKey(false, event.key, event.code);
+  });
+
+  document.addEventListener('keyup', (event) => {
+    const element = document.querySelector('.keyboard__key-active');
+    element.classList.remove('keyboard__key-active');
+    if (event.key === 'Shift') {
+      virtualKeyboard.shift = false;
+      virtualKeyboard.changeShift();
     }
   });
 };
-
-document.addEventListener('keyup', () => {
-  const element = document.querySelector('.keyboard__key-active');
-  element.classList.remove('keyboard__key-active');
-});

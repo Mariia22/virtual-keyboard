@@ -7,7 +7,8 @@ class Keyboard {
     this.textarea = '';
     this.content = '';
     this.row = '';
-    // this.text = '';
+    this.caps = false;
+    this.shift = false;
   }
 
   createDomElement(element, ...classes) {
@@ -46,6 +47,7 @@ class Keyboard {
     for (let i = 54; i < 64; i += 1) {
       this.createKeysButton(arrayKeys[i], this.keys[arrayKeys[i]]);
     }
+    this.changeLang(this.lang);
   }
 
   createRow() {
@@ -93,14 +95,118 @@ class Keyboard {
     button.append(spanRus);
     button.append(spanEn);
     button.addEventListener('click', (event) => {
-      this.onClickKey(event.target.innerText);
+      this.onClickKey(true, event.target.innerText);
     });
     this.row.append(button);
   }
 
-  onClickKey(key) {
-    if (key !== 'Shift') {
+  onClickKey(changeFlag, key, code) {
+    if (key === 'CapsLock') {
+      this.caps = !this.caps;
+      this.toggleCapsLock();
+      this.changeCapsLock();
+    } else if (key === 'Shift') {
+      this.shift = true;
+      this.changeShift();
+    } else if (changeFlag) {
       this.textarea.value += key;
+    } else {
+      const elements = document.querySelector(`.${code}`).childNodes;
+      let result;
+      elements.forEach((element) => {
+        if (!element.classList.contains('hidden')) {
+          element.childNodes.forEach((span) => {
+            if (!span.classList.contains('hidden')) {
+              result = span;
+            }
+          });
+        }
+      });
+      this.textarea.value += result.innerHTML;
+    }
+  }
+
+  toggleCapsLock() {
+    const capsLock = document.querySelector('.CapsLock');
+    if (this.caps) {
+      capsLock.classList.add('CapsLock--active');
+    } else {
+      capsLock.classList.remove('CapsLock--active');
+    }
+  }
+
+  changeLang() {
+    const spanArrayRus = document.querySelectorAll('.keyboard__rus');
+    const spanArrayEng = document.querySelectorAll('.keyboard__eng');
+    if (this.lang === 'en') {
+      spanArrayRus.forEach((span) => {
+        span.classList.add('hidden');
+        span.childNodes[0].classList.add('hidden');
+      });
+      spanArrayEng.forEach((span) => {
+        span.classList.remove('hidden');
+        span.childNodes[0].classList.remove('hidden');
+      });
+    } else {
+      spanArrayEng.forEach((span) => {
+        span.classList.add('hidden');
+        span.childNodes[0].classList.add('hidden');
+      });
+      spanArrayRus.forEach((span) => {
+        span.classList.remove('hidden');
+        span.childNodes[0].classList.remove('hidden');
+      });
+    }
+  }
+
+  changeCapsLock() {
+    if (this.caps && this.lang === 'en') {
+      const spanArray = document.querySelectorAll('.keyboard__eng');
+      spanArray.forEach((span) => {
+        span.childNodes[2].classList.remove('hidden');
+        span.childNodes[0].classList.add('hidden');
+      });
+    } else if (this.caps && this.lang === 'ru') {
+      const spanArray = document.querySelectorAll('.keyboard__rus');
+      spanArray.forEach((span) => {
+        span.childNodes[2].classList.remove('hidden');
+        span.childNodes[0].classList.add('hidden');
+      });
+    } else if (!this.caps && this.lang === 'en') {
+      const spanArray = document.querySelectorAll('.keyboard__eng');
+      spanArray.forEach((span) => {
+        span.childNodes[2].classList.add('hidden');
+        span.childNodes[0].classList.remove('hidden');
+      });
+    } else if (!this.caps && this.lang === 'ru') {
+      const spanArray = document.querySelectorAll('.keyboard__rus');
+      spanArray.forEach((span) => {
+        span.childNodes[2].classList.add('hidden');
+        span.childNodes[0].classList.remove('hidden');
+      });
+    }
+  }
+
+  changeShift() {
+    console.log(this.shift);
+    if (this.lang === 'en' && this.shift) {
+      const spanArray = document.querySelectorAll('.keyboard__eng');
+      spanArray.forEach((span) => {
+        span.childNodes[0].classList.add('hidden');
+        span.childNodes[1].classList.remove('hidden');
+      });
+    } else if (this.lang === 'ru' && this.shift) {
+      const spanArray = document.querySelectorAll('.keyboard__rus');
+      spanArray.forEach((span) => {
+        span.childNodes[0].classList.add('hidden');
+        span.childNodes[1].classList.remove('hidden');
+      });
+    } else if (this.shift === false) {
+      const spanArray = document.querySelectorAll('.keyboard__rus');
+      spanArray.forEach((span) => {
+        span.childNodes[0].classList.remove('hidden');
+        span.childNodes[1].classList.add('hidden');
+      });
     }
   }
 }
