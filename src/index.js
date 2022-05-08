@@ -13,7 +13,7 @@ window.onload = function load() {
 
   document.addEventListener('keyup', (event) => {
     const element = document.querySelector('.keyboard__key-active');
-    element.classList.remove('keyboard__key-active');
+    if (element) { element.classList.remove('keyboard__key-active'); }
     if (event.key === 'Shift') {
       virtualKeyboard.shift = false;
       if (virtualKeyboard.caps) {

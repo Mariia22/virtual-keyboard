@@ -28,9 +28,11 @@ class Keyboard {
     this.header = this.createDomElement('h1', 'header');
     this.header.innerHTML = 'RSS Virtual Keyboard';
     this.textarea = this.createDomElement('textarea', 'keyboard__textarea');
+    this.textarea.rows = 5;
+    this.textarea.cols = 50;
     this.content = this.createDomElement('div', 'keyboard__content');
     this.paragraph = this.createDomElement('p', 'keyboard__info');
-    this.paragraph.innerHTML = 'Клавиатура создана на MAC OS, поэтому имеет некоторые особенности, например кнопка "delete" работает как "backspase" на Windows. "fn" +"delete" - удаление символов после курсора. Переключение языка левые Ctrl+Alt.';
+    this.paragraph.innerHTML = 'Клавиатура создана на MAC OS, поэтому имеет некоторые особенности, например кнопка delete работает как backspase на Windows. control + delete - удаление символов после курсора на данной клавиатуре. Переключение языка левые control+alt.';
     this.appendElements();
     this.createRow();
     const arrayKeys = Object.keys(this.keys);
@@ -107,6 +109,7 @@ class Keyboard {
   }
 
   onClickKey(changeFlag, key, code) {
+    console.log(key, code);
     if (key === 'CapsLock' && !this.shift) {
       this.caps = !this.caps;
       this.toggleCapsLock();
@@ -121,6 +124,26 @@ class Keyboard {
       this.caps = !this.caps;
       this.toggleCapsLock();
       this.changeShiftCapsLock();
+    } else if (key === 'delete' || key === 'Backspace') {
+      const currentString = this.textarea.value;
+      const deleteString = currentString.slice(0, currentString.length - 1);
+      this.textarea.value = deleteString;
+    } else if (key === 'Tab') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}\t${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+      this.textarea.selectionStart += 1;
+      this.textarea.selectionEnd = this.textarea.selectionStart + 1;
+    } else if (key === 'Enter') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}\n${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+    } else if (key === 'Meta' || key === 'command') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+    } else if (key === '' || key === 'Space') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)} ${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+    } else if (key === 'Control' || key === 'control') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+    } else if (key === 'Alt' || key === 'alt') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
+    } else if (key === 'fn') {
+      this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
     } else if (changeFlag) {
       this.textarea.value += key;
     } else {
