@@ -16,7 +16,13 @@ window.onload = function load() {
     element.classList.remove('keyboard__key-active');
     if (event.key === 'Shift') {
       virtualKeyboard.shift = false;
-      virtualKeyboard.changeShift();
+      if (virtualKeyboard.caps) {
+        virtualKeyboard.changeShiftCapsLock();
+      } else {
+        virtualKeyboard.changeShift();
+      }
     }
   });
+
+  virtualKeyboard.combinationChangeLanguage();
 };
