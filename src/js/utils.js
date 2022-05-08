@@ -53,3 +53,13 @@ export function switchCapsUnshift(array) {
     span.childNodes[3].classList.add('hidden');
   });
 }
+
+export function setLocalStorage(lang) {
+  localStorage.setItem('lang', lang);
+}
+
+export function getLocalStorage() {
+  let currentLang;
+  if (localStorage.getItem('lang')) { currentLang = localStorage.getItem('lang'); } else { currentLang = 'en'; }
+  return currentLang;
+}

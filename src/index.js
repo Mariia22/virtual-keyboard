@@ -1,8 +1,10 @@
 import Keyboard from './js/Keyboard';
 import keys from './js/data';
+import { setLocalStorage, getLocalStorage } from './js/utils';
 
+const currentLang = getLocalStorage();
+const virtualKeyboard = new Keyboard(currentLang, keys);
 window.onload = function load() {
-  const virtualKeyboard = new Keyboard('en', keys);
   virtualKeyboard.buildKeyboard();
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
@@ -25,4 +27,8 @@ window.onload = function load() {
   });
 
   virtualKeyboard.combinationChangeLanguage();
+};
+
+window.onbeforeunload = function unload() {
+  setLocalStorage(virtualKeyboard.lang);
 };

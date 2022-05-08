@@ -109,7 +109,6 @@ class Keyboard {
   }
 
   onClickKey(changeFlag, key, code) {
-    console.log(key, code);
     if (key === 'CapsLock' && !this.shift) {
       this.caps = !this.caps;
       this.toggleCapsLock();
