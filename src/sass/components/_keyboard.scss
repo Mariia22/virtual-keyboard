@@ -1,0 +1,105 @@
+.keyboard__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.keyboard__row {
+  width: 100%;
+  height: 60px;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard__key {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  margin-left: 5px;
+  @extend %font-prim;
+  font-size: .9rem;
+  background-color: $color-background;
+  color: $color-black;
+  box-shadow: 5px 5px 10px #474343, -5px -5px 10px #ffffff;
+  border-radius: 20%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  @include media-mobile {
+    font-size: .5rem;
+  }
+}
+
+.keyboard__key:active,
+.keyboard__key-active {
+  box-shadow: 1px 1px 2px #fff8f8, -1px -1px 2px #474343;
+}
+
+.keyboard__key.Backspace {
+  width: 115px;
+  border-radius: 10px;
+}
+
+.keyboard__key.Tab {
+  width: 85px;
+  border-radius: 10px;
+}
+
+.keyboard__key.Backslash {
+  width: 85px;
+  border-radius: 10px;
+}
+
+.keyboard__key.CapsLock {
+  width: 100px;
+  border-radius: 10px;
+}
+
+.keyboard__key.CapsLock::after {
+  position: absolute;
+  content: '';
+  top: 7px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background: $color-grey;
+  border-radius: 50%;
+}
+
+.keyboard__key.CapsLock.CapsLock--active::after {
+  background: $color-for-caps;
+}
+
+.keyboard__key.Enter {
+  width: 135px;
+  border-radius: 10px;
+}
+
+.keyboard__key.Space {
+  width: 283px;
+  border-radius: 10px;
+}
+
+.keyboard__key.ShiftLeft,
+.keyboard__key.ShiftRight {
+  width: 118px;
+  border-radius: 10px;
+}
+
+.keyboard__key.ControlLeft,
+.keyboard__key.ControlRight,
+.keyboard__key.MetaLeft,
+.keyboard__key.MetaRight {
+  width: 80px;
+  border-radius: 10px;
+
+  @include media-mobile {
+    width: 60px;
+  }
+}

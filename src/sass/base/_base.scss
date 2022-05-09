@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'Arial';
+  src: url('./fonts/Arial.woff2') format('woff2'),
+    url('./fonts/Arial.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  @extend %font-prim;
+  @include font($size: 1rem, $lineheight: 1.6rem, $weight: normal);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: $color-background;
+}
+
+.keyboard__wrapper {
+  max-width: $content-width;
+  width: 100%;
+  padding: 0 40px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @include media-tablet {
+    padding: 0 30px;
+  }
+
+  @include media-mobile {
+    padding: 0 10px;
+  }
+}
+
+h1 {
+  @extend %font-prim;
+  @include font($lineheight: 2.35rem, $size: 2.13rem, $weight: 400);
+  letter-spacing: 0.06em;
+  margin: 0;
+  color: $color-grey;
+  text-align: center;
+}
+
+p {
+  margin: 0;
+  color: $color-grey;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
