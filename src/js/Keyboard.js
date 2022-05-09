@@ -117,17 +117,10 @@ class Keyboard {
       this.toggleCapsLock();
       this.changeCapsLock();
     } else if (key === 'Shift' && !this.caps) {
-      this.shift = !this.shift;
-      if (this.shift) {
-        code.closest('button').classList.add('keyboard__key-active');
-      } else {
-        const array = document.querySelectorAll('.keyboard__key-active');
-        if (array.length > 0) {
-          array.forEach((item) => item.classList.remove('keyboard__key-active'));
-        }
-      }
+      this.toggleShift(code);
       this.changeShift();
     } else if (key === 'Shift' && this.caps) {
+      this.toggleShift(code);
       this.changeShiftCapsLock();
     } else if (key === 'CapsLock' && this.shift) {
       this.caps = !this.caps;
@@ -143,7 +136,11 @@ class Keyboard {
         this.textarea.focus();
       }
     } else if (key === 'Tab') {
+      const start = this.textarea.selectionStart;
       this.textarea.setRangeText('\t', this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
+      this.textarea.focus();
+      this.textarea.selectionStart = start + 1;
+      this.textarea.selectionEnd = start + 1;
     } else if (key === 'Enter') {
       this.textarea.setRangeText('\n', this.textarea.selectionStart, this.textarea.selectionEnd, 'end');
       this.textarea.focus();
@@ -151,8 +148,11 @@ class Keyboard {
       this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
       this.textarea.focus();
     } else if (key === '' || code === 'Space') {
+      const start = this.textarea.selectionStart;
       this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)} ${this.textarea.value.substring(this.textarea.selectionEnd)}`;
       this.textarea.focus();
+      this.textarea.selectionStart = start + 1;
+      this.textarea.selectionEnd = start + 1;
     } else if (key === 'Control' || key === 'control') {
       this.textarea.value = `${this.textarea.value.substring(0, this.textarea.selectionStart)}${this.textarea.value.substring(this.textarea.selectionEnd)}`;
     } else if (key === 'Alt' || key === 'alt') {
@@ -300,6 +300,18 @@ class Keyboard {
     } else if (!this.caps && this.lang === 'ru') {
       const spanArray = document.querySelectorAll('.keyboard__rus');
       switcnNonCapsLock(spanArray);
+    }
+  }
+
+  toggleShift(code) {
+    this.shift = !this.shift;
+    if (this.shift) {
+      code.closest('button').classList.add('keyboard__key-active');
+    } else {
+      const array = document.querySelectorAll('.keyboard__key-active');
+      if (array.length > 0) {
+        array.forEach((item) => item.classList.remove('keyboard__key-active'));
+      }
     }
   }
 

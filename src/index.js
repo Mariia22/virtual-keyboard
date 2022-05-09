@@ -10,6 +10,8 @@ window.onload = function load() {
   virtualKeyboard.buildKeyboard();
   document.addEventListener('keydown', (event) => {
     event.preventDefault();
+    if (event.code === 'ControlRight') { return; }
+    if (event.code === 'AltRight') { return; }
     if (event.code === 'Delete') {
       virtualKeyboard.onClickKey(false, event.key, event.code);
     } else if (event.code === 'ControlLeft') {
@@ -32,6 +34,8 @@ window.onload = function load() {
 
   document.addEventListener('keyup', (event) => {
     if (event.code === 'Delete') { return; }
+    if (event.code === 'ControlRight') { return; }
+    if (event.code === 'AltRight') { return; }
     if (event.code === 'ControlLeft') {
       virtualKeyboard.controlLeft = false;
       removeActiveClass(event);
