@@ -72,13 +72,17 @@ export function getLocalStorage() {
 }
 
 export function getActiveClass(event) {
-  const element = document.querySelector(`.${event.code}`);
-  element.classList.add('keyboard__key-active');
+  if (event.code) {
+    const element = document.querySelector(`.${event.code}`);
+    element.classList.add('keyboard__key-active');
+  }
 }
 
 export function removeActiveClass(event) {
-  const element = document.querySelector(`.${event.code}`);
-  if (element) {
-    element.classList.remove('keyboard__key-active');
+  if (event.code) {
+    const element = document.querySelector(`.${event.code}`);
+    if (element) {
+      element.classList.remove('keyboard__key-active');
+    }
   }
 }
