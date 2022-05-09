@@ -14,7 +14,7 @@ module.exports = {
   entry: ['regenerator-runtime/runtime.js', './src/index.js', './src/style.scss'],
   output: {
     path: path.resolve(__dirname, './dist'),
-    clean: true,
+    clean: { keep: /\.git/ },
     filename: 'main.js',
     publicPath: '/dist/',
   },
