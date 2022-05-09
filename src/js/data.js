@@ -271,9 +271,9 @@ const keys = {
   },
   Backslash: {
     rusCaseDown: '\\',
-    rusCaseUp: '//',
+    rusCaseUp: '/',
     rusCaps: '\\',
-    rusShiftCaps: '//',
+    rusShiftCaps: '/',
     enCaseDown: '\\',
     enCaseUp: '|',
     enCaps: '\\',
